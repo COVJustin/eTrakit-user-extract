@@ -60,14 +60,15 @@ def login(url, driver, usr, pwd, user, type):
     pagecounter = 1
     run = True
     numltr = user[0]
-    WebDriverWait(driver, '10').until(
-            EC.presence_of_element_located((By.XPATH, "//select[@id='ddFilter']"))
-            )
-    select = Select(driver.find_element(By.XPATH, "//select[@id='ddFilter']"))
-    select.select_by_value(numltr.capitalize())
-    WebDriverWait(driver, '10').until(
-            EC.presence_of_element_located((By.XPATH, "//input[@id='btnSearch']"))
-            ).click()
+    if numltr.isalpha():
+        WebDriverWait(driver, '10').until(
+                EC.presence_of_element_located((By.XPATH, "//select[@id='ddFilter']"))
+                )
+        select = Select(driver.find_element(By.XPATH, "//select[@id='ddFilter']"))
+        select.select_by_value(numltr.capitalize())
+        WebDriverWait(driver, '10').until(
+                EC.presence_of_element_located((By.XPATH, "//input[@id='btnSearch']"))
+                ).click()
     while run:
         try:
             for i in range(20):
