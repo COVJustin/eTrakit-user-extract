@@ -84,6 +84,9 @@ def login(url, driver, usr, pwd, user, type):
                                 ).text
                     if username.casefold() == user.casefold():
                         run = False
+                        WebDriverWait(driver, '10').until(
+                                EC.presence_of_element_located((By.CSS_SELECTOR, "tr:nth-child(" + str(i + 2) + ") input"))
+                                ).click()
                 except TimeoutException:
                     print("Username Not Found")
                     run = False
